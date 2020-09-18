@@ -264,12 +264,6 @@ public:
 		
 		return finalResult;
 	}
-
-
-	// print object value
-	void print() {
-		cout << this->number << "\n";
-	}
 	
 };
 
