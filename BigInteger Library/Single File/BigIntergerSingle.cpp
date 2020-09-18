@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
-
+#include <iostream>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 
 
-class BigInterger {
+class BigInteger {
 	
 	// Properties
 
@@ -16,41 +17,41 @@ public:
 
 	// Constructors
 
-	BigInterger() {
+	BigInteger() {
 		this->number = new char[length];
 	}
-	BigInterger(const char *num) {
+	BigInteger(const char *num) {
 		this->number = new char[length];
 		this->number = num;
 	}
 
 	// Copy constructor
 
-	BigInterger(const BigInterger &num) {
+	BigInteger(const BigInteger &num) {
 		this->number = new char[length];
 		this->number = num.number;
 	}
 
 	// Operator overloading
 
-	BigInterger operator=(const BigInterger &num) {
+	BigInteger operator=(const BigInteger &num) {
 		this->number = num.number;
 		return *this;
 	}
 
-	BigInterger operator=(const char *num) {
+	BigInteger operator=(const char *num) {
 		this->number = num;
 		return *this;
 	}
 
-	friend ostream& operator<<(ostream &os, BigInterger &num) {
+	friend ostream& operator<<(ostream &os, BigInteger &num) {
 		os << num.number;
 		return os;
 	}
 
 	// Addition
 
-	char* add(const BigInterger &num) {
+	char* add(const BigInteger &num) {
 
 		bool isFirstNumberSmall = 0;
 
@@ -179,7 +180,7 @@ public:
 
 	// subtract
 
-	const char* sub(const BigInterger &num) {
+	const char* sub(const BigInteger &num) {
 
 		bool isFirstNumberSmall = 0;
 		
@@ -268,7 +269,8 @@ public:
 };
 
 
-int main()
-{
-	
-}
+// int main()
+// {
+// 	BigInteger x = "100", y = "89";
+// 	cout << x.add(y) << "\n";
+// }
