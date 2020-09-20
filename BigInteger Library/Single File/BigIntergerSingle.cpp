@@ -21,14 +21,22 @@ public:
 		this->number = new char[length];
 	}
 	BigInteger(const char *num) {
+		length = strlen(num);
 		this->number = new char[length];
 		this->number = num;
+	}
+	BigInteger(const long long num) {
+		const string str = to_string(num);
+		length = str.length();
+		char *n = new char[length];
+		strcpy(n, str.c_str());
+		this->number = n;
 	}
 
 	// Copy constructor
 
 	BigInteger(const BigInteger &num) {
-		this->number = new char[length];
+		this->number = new char[strlen(num.number)];
 		this->number = num.number;
 	}
 
@@ -74,6 +82,7 @@ public:
 				char *finalResult = new char[length];
 				finalResult[0] = '-';
 				strcat(finalResult+1, result+nonZeroPos);
+				delete result;
 				return finalResult;
 			}
 		}
@@ -93,6 +102,7 @@ public:
 				char *finalResult = new char[length];
 				finalResult[0] = '-';
 				strcat(finalResult+1, result+nonZeroPos);
+				delete result;
 				return finalResult;
 			}
 		}
@@ -101,6 +111,7 @@ public:
 		char *finalResult = new char[length];
 		finalResult[0] = '-';
 		strcat(finalResult+1, result);
+		delete result;
 		return finalResult;
 	}
 
@@ -203,6 +214,7 @@ public:
 				char *finalResult = new char[length];
 				finalResult[0] = '-';
 				strcat(finalResult+1, result+nonZeroPos);
+				delete result;
 				return finalResult;
 			}
 			
@@ -228,6 +240,7 @@ public:
 			char *finalResult = new char[length];
 			finalResult[0] = '-';
 			strcat(finalResult+1, result+nonZeroPos);
+			delete result;
 			return finalResult;
 		}
 		
@@ -262,15 +275,85 @@ public:
 		char *finalResult = new char[length];
 		finalResult[0] = '-';
 		strcat(finalResult+1, result+nonZeroPos);
-		
+		delete result;
 		return finalResult;
 	}
+
+	// Multiplication
+
+	const char* multipliar(const char* n1, const char* n2) {
+		int n1_len = strlen(n1), n2_len = strlen(n2);
+		char* res = new char[n1_len+n2_len];
+		for (int i = 0; i < n1_len+n2_len; ++i) res[i] = '0';
+		int j_n2 = 0, carry = 0, res_len = 0;
+		for (int i = 0; i < n1_len; ++i)
+		{
+			j_n2 = 0, carry = 0;
+			for (int j = 0; j < n2_len; ++j)
+			{
+				int m = (n1[n1_len - i - 1] - '0') * (n2[n2_len - j - 1] - '0') + (res[i+j_n2]-'0') + carry;
+				res[i+j_n2] = m%10 + '0';
+				carry = m/10;
+				j_n2++;
+			}
+			if(carry) res[i+j_n2] = carry+'0';
+
+		}
+		int i = n1_len+n2_len-1;
+		for (; i>=0; --i)
+			if(res[i] != '0') break;
+		if(i == -1) return "0";
+		reverse(res, res+i+1);
+		res[i+1] = '\0';
+		return res;
+	}
+
+	const char* mul(const BigInteger &num) {
+
+		bool negSign = 0;
+		if((this->number[0] == '-' || num.number[0] == '-') && (this->number[0] != '-' || num.number[0] != '-')) negSign = 1;
+		
+		int len1 = strlen(this->number), len2 = strlen(num.number);
+		
+		if(this->number[0] == '-') len1--;
+		if(num.number[0] == '-') len2--;
+		
+		const char *res;
+		if(len1 > len2) {
+			if(this->number[0] == '-' && num.number[0] != '-')
+				res = multipliar(num.number, this->number+1);
+			else if(this->number[0] != '-' && num.number[0] == '-')
+				res = multipliar(num.number+1, this->number);
+			else if(this->number[0] == '-' && num.number[0] == '-')
+				res = multipliar(num.number+1, this->number+1);
+			else res = multipliar(num.number, this->number);
+		}
+		else {
+			if(this->number[0] == '-' && num.number[0] != '-')
+				res = multipliar(this->number+1, num.number);
+			else if(this->number[0] != '-' && num.number[0] == '-')
+				res = multipliar(this->number, num.number+1);
+			else if(this->number[0] == '-' && num.number[0] == '-')
+				res = multipliar(this->number+1, num.number+1);
+			else res = multipliar(this->number, num.number);
+		}
+		if(negSign) {
+			char *finalResult = new char[strlen(res)];
+			finalResult[0] = '-';
+			strcat(finalResult+1, res);
+			delete res;
+			return finalResult;
+		}
+		return res;
+	}
+
 	
 };
 
 
-// int main()
-// {
-// 	BigInteger x = "100", y = "89";
-// 	cout << x.add(y) << "\n";
-// }
+int main()
+{
+	BigInteger x = "99", y = "-999";
+
+	cout << y.mul(x) << "\n";
+}

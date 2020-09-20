@@ -17,6 +17,7 @@ public:
 
 	BigInteger();
 	BigInteger(const char *num);
+	BigInteger(const long long num);
 
 	// Copy constructor
 
@@ -42,6 +43,10 @@ public:
 
 	const char* sub(const BigInteger &num);
 	
+	// Multiplication
+	
+	const char* multipliar(const char* n1, const char* n2);
+	const char* mul(const BigInteger &num);
 };
 
 
