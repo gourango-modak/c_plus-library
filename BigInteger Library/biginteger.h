@@ -39,6 +39,14 @@ public:
 
     BigInteger operator=(const char *num);
 
+	// Plus Operator
+
+	char* operator+(BigInteger &num);
+
+	// Minus Operator
+
+	char* operator-(BigInteger &num);
+
 	// Pre Increment Operator
 
 	BigInteger operator++();

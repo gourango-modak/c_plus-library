@@ -86,6 +86,20 @@ BigInteger BigInteger::operator=(const char *num) {
 	return *this;
 }
 
+// Plus Operator
+
+char* BigInteger::operator+(BigInteger &num) {
+	char *result = this->add(num);
+	return result;
+}
+
+// Minus Operator
+
+char* BigInteger::operator-(BigInteger &num) {
+	char *result = this->sub(num);
+	return result;
+}
+
 // Pre Increment Operator
 
 BigInteger BigInteger::operator++() {

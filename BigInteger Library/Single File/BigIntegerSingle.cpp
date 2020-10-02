@@ -107,6 +107,20 @@ public:
 		return *this;
 	}
 
+	// Plus Operator
+
+	char* operator+(BigInteger &num) {
+		char *result = this->add(num);
+		return result;
+	}
+
+	// Minus Operator
+
+	char* operator-(BigInteger &num) {
+		char *result = this->sub(num);
+		return result;
+	}
+
 	BigInteger operator--() {
 		BigInteger one = 1;
 		char *result = this->sub(one);
@@ -650,7 +664,7 @@ public:
 
 int main()
 {
-    BigInteger x,y;
-	cin >> x >> y;
-	cout << x << " : " << y << "\n";
+    BigInteger x=7,y=10;
+	// cin >> x >> y;
+	cout << x+y << "\n";
 }
