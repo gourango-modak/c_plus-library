@@ -6,8 +6,8 @@ class BigInteger {
 	
 	// Properties
 
-	const char *number;
-	int length = 100000;
+	char *number;
+	int length = 1000;
 
 public:
 
@@ -16,37 +16,80 @@ public:
 	// Constructors
 
 	BigInteger();
-	BigInteger(const char *num);
-	BigInteger(const long long num);
+	BigInteger(char*);
+    BigInteger(std::string);
+	BigInteger(const char*);
+	BigInteger(const long long);
 
 	// Copy constructor
 
 	BigInteger(const BigInteger &num);
 
+	// Property
+
+	void setNumber(char* num);
+
 	// Operator overloading
 
-	BigInteger operator=(const BigInteger &num);
+	BigInteger operator=(BigInteger &num);
 
-	BigInteger operator=(const char *num);
+    BigInteger operator=(std::string num);
 
-	friend ostream& operator<<(ostream &os, BigInteger &num);
+	BigInteger operator=(char *num);
+
+    BigInteger operator=(const char *num);
+
+	// Pre Increment Operator
+
+	BigInteger operator++();
+
+	BigInteger operator--();
+
+	// Post Increment Operator
+
+	BigInteger operator++(int);
+
+	BigInteger operator--(int);
+
+
+	// Modulo Operator
+	char* operator%(BigInteger &dividend);
+
+	// Divide Operator
+	char* operator/(BigInteger &dividend);
+
+	friend std::ostream& operator<<(std::ostream &os, BigInteger &num);
+
+    friend std::istream& operator>>(std::istream &is, BigInteger &num);
 
 	// Addition
 
-	char* add(const BigInteger &num);
+	char* add(BigInteger &num);
 
-	bool isSmaller(const char *n1, const char *n2);
+	char isSmaller(char *n1, char *n2);
 
-	char* operation(char ops, const char *n1, const char *n2);
-
+	char* operation(char ops, char *n1, char *n2);
+	
 	// subtract
 
-	const char* sub(const BigInteger &num);
+	char* sub(BigInteger &num);
 	
 	// Multiplication
+
+	char* multipliar(char* n1, char* n2);
+
+	char* mul(BigInteger &num);
+
+	// Division
+
+    std::pair<char*, char*> divOps(BigInteger &divisor, BigInteger &dividend);
+
+	char* div(BigInteger &dividend);
+
+	// Modulo
 	
-	const char* multipliar(const char* n1, const char* n2);
-	const char* mul(const BigInteger &num);
+    char* mod(BigInteger &dividend);
+
 };
 
 
