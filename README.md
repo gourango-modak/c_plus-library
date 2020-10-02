@@ -8,7 +8,7 @@ If you need to work with large integers that maybe overflow in build-in data typ
 
 ## Details About this library
 
-when we deal with large number which can't fit in build-In data type size, then this libray is useful because it is easy to use just like build-in data type. In this library, I use character arrays to store the number or String(taking input number as a string). Do all operation using character arrays. we know character array takes less memory than integer array. That's why I choose character array for memory efficency also I didn't use much other libraries. I used queue, cstring, iostream. String library is uses very less time in this library.
+when we deal with large number which can't fit in build-In data type size, then this libray is useful because it is easy to use just like build-in data type. In this library, I use character arrays to store the number or String(taking input number as a string). Do all operation using character arrays. we know character array takes less memory than integer array. That's why I choose character array for memory efficency also I didn't use much other libraries. I used queue, cstring, iostream. String library uses very less time in this library.
 
 
 ## This project contain two version of library
